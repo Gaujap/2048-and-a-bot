@@ -218,7 +218,13 @@ public class Game {
     }
 
     private boolean isWin() {
-        // Check if the game is won
+        for (int i = 0; i < size; i++) {
+            for (int j = 0; j < size; j++) {
+                if (board[i][j] == 2048) {
+                    return true;
+                }
+            }
+        }
         return false;
     }
 
@@ -261,7 +267,7 @@ public class Game {
     }
 
     public void printWin() {
-        // Print if the game is won
+        System.out.println("You win!");
     }
 
     public void play() {
@@ -269,7 +275,6 @@ public class Game {
         addRandomTile();
         printBoard();
         printScore();
-        printLose();
 
         while (!lose) {
             String direction = scanner.next();
@@ -277,6 +282,7 @@ public class Game {
             printBoard();
             printScore();
             printLose();
+            printWin();
         }
     }
 
