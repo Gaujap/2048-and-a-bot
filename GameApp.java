@@ -52,6 +52,21 @@ public class GameApp extends Application {
         updateScoreAndStatus();
     }
 
+    private void updateGrid() {
+        grid.getChildren().clear();
+        int[][] board = game.getBoard();
+        for (int row = 0; row < board.length; row++) {
+            for (int col = 0; col < board[row].length; col++) {
+                Label cell = new Label(String.valueOf(board[row][col] == 0 ? "" : board[row][col]));
+                cell.setPrefSize(100, 100);
+                cell.setFont(Font.font(24));
+                cell.setTextAlignment(TextAlignment.CENTER);
+                cell.setStyle(getCellStyle(board[row][col]));
+                grid.add(cell, col, row);
+            }
+        }
+    }
+
     public static void main(String[] args) {
         launch(args);
     }
