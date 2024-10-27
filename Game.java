@@ -24,6 +24,10 @@ public class Game {
         return board;
     }
 
+    public int getScore() {
+        return score;
+    }
+
     private void addRandomTile() {
         int value = random.nextInt(10) < 9 ? 2 : 4;
         int x, y;
@@ -127,7 +131,7 @@ public class Game {
         }
     }
 
-    private boolean isLose() {
+    public boolean isLose() {
         for (int i = 0; i < size; i++) {
             for (int j = 0; j < size; j++) {
                 if (board[i][j] == 0) return false;
@@ -140,7 +144,7 @@ public class Game {
         return true;
     }
 
-    private boolean isWin() {
+    public boolean isWin() {
         for (int[] row : board) {
             for (int tile : row) {
                 if (tile == 2048) return true;
