@@ -263,7 +263,7 @@ public class Game {
     }
 
     public void printLose() {
-        // Print if the game is lost
+        System.out.println("You lose!");
     }
 
     public void printWin() {
