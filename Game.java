@@ -20,6 +20,10 @@ public class Game {
         addRandomTile();
     }
 
+    public int[][] getBoard() {
+        return board;
+    }
+
     private void addRandomTile() {
         int value = random.nextInt(10) < 9 ? 2 : 4;
         int x, y;
@@ -166,8 +170,6 @@ public class Game {
     }
 
     public void play() {
-        addRandomTile();
-        addRandomTile();
         printBoard();
         printScore();
 
