@@ -41,7 +41,7 @@ public class GameApp extends Application {
 
         scene.setOnKeyPressed(this::handleKeyPress);
 
-        bot = new Bot(game);
+        bot = new Bot(game, this);
         new Thread(() -> bot.play()).start();
     }
 
@@ -56,7 +56,7 @@ public class GameApp extends Application {
         updateScoreAndStatus();
     }
 
-    private void updateGrid() {
+    public void updateGrid() {
         grid.getChildren().clear();
         int[][] board = game.getBoard();
         for (int row = 0; row < board.length; row++) {
