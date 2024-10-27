@@ -1,8 +1,11 @@
+import java.util.Random;
+
 public class Game {
     private int size;
     private int[][] board;
     private int score;
     private boolean lose;
+    private Random random = new Random();
 
     public Game(int size) {
         this.size = size;
@@ -12,7 +15,14 @@ public class Game {
     }
 
     private void addRandomTile() {
-        // Add a random tile to the board
+        int value = random.nextInt(10) < 9 ? 2 : 4;
+        int x, y;
+        do {
+            x = random.nextInt(size);
+            y = random.nextInt(size);
+        } while (board[x][y] != 0);
+
+        board[x][y] = value;
     }
 
     private void moveUp() {
@@ -53,7 +63,11 @@ public class Game {
     }
 
     public void play() {
-        // Play the game
+        addRandomTile();
+        addRandomTile();
+        printBoard();
+        printScore();
+        printLose();
     }
 
     public static void main(String[] args) {
