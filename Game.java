@@ -28,7 +28,7 @@ public class Game {
         return score;
     }
 
-    public void setBoard(int[][] board) {   // For Bot.java
+    public void setBoard(int[][] board) {
         this.board = board;
     }
 
@@ -127,10 +127,10 @@ public class Game {
 
     public void move(String direction) {
         boolean moved = switch (direction) {
-            case "z" -> slideVertical(true);     // Haut
-            case "s" -> slideVertical(false);    // Bas
-            case "q" -> slideHorizontal(true);   // Gauche
-            case "d" -> slideHorizontal(false);  // Droite
+            case "z" -> slideVertical(true);
+            case "s" -> slideVertical(false);
+            case "q" -> slideHorizontal(true);
+            case "d" -> slideHorizontal(false);
             default -> false;
         };
 
