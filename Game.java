@@ -67,6 +67,25 @@ public class Game {
         return moved;
     }
 
+    private boolean slideVertical(boolean upwards) {
+        boolean moved = false;
+        for (int col = 0; col < size; col++) {
+            int[] line = new int[size];
+            for (int row = 0; row < size; row++) {
+                line[row] = upwards ? board[row][col] : board[size - row - 1][col];
+            }
+            moved |= slideAndMerge(line);
+            for (int row = 0; row < size; row++) {
+                if (upwards) {
+                    board[row][col] = line[row];
+                } else {
+                    board[size - row - 1][col] = line[row];
+                }
+            }
+        }
+        return moved;
+    }
+
     private void moveUp() {
         boolean moved = false;
 
