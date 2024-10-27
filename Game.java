@@ -49,6 +49,7 @@ public class Game {
             for (int j = 0; j < size; j++) {
                 if (board[i][j] != 0 && i > 0 && board[i - 1][j] == board[i][j]) {
                     board[i - 1][j] *= 2;
+                    score += board[i - 1][j];
                     board[i][j] = 0;
                     moved = true;
                 }
@@ -95,6 +96,7 @@ public class Game {
             for (int j = size - 1; j >= 0; j--) {
                 if (board[i][j] != 0 && j < size - 1 && board[i][j + 1] == board[i][j]) {
                     board[i][j + 1] *= 2;
+                    score += board[i][j + 1];
                     board[i][j] = 0;
                     moved = true;
                 }
@@ -141,6 +143,7 @@ public class Game {
             for (int j = 0; j < size; j++) {
                 if (board[i][j] != 0 && j > 0 && board[i][j - 1] == board[i][j]) {
                     board[i][j - 1] *= 2;
+                    score += board[i][j - 1];
                     board[i][j] = 0;
                     moved = true;
                 }
@@ -187,6 +190,7 @@ public class Game {
             for (int j = size - 1; j >= 0; j--) {
                 if (board[i][j] != 0 && j < size - 1 && board[i][j + 1] == board[i][j]) {
                     board[i][j + 1] *= 2;
+                    score += board[i][j + 1];
                     board[i][j] = 0;
                     moved = true;
                 }
