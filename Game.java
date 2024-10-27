@@ -259,7 +259,7 @@ public class Game {
     }
 
     public void printScore() {
-        // Print the score
+        System.out.print("Score: " + score);
     }
 
     public void printLose() {
