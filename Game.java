@@ -28,6 +28,18 @@ public class Game {
         return score;
     }
 
+    public void setBoard(int[][] board) {   // For Bot.java
+        this.board = board;
+    }
+
+    public int setSize() {
+        return size;
+    }
+
+    public void setScore(int score) {
+        this.score = score;
+    }
+
     private void addRandomTile() {
         int value = random.nextInt(10) < 9 ? 2 : 4;
         int x, y;
