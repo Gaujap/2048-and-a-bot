@@ -67,6 +67,18 @@ public class GameApp extends Application {
         }
     }
 
+    private void updateScoreAndStatus() {
+        scoreLabel.setText("Score: " + game.getScore());
+
+        if (game.isWin()) {
+            statusText.setText("Congratulations! You've won!");
+        } else if (game.isLose()) {
+            statusText.setText("Game Over! You've lost.");
+        } else {
+            statusText.setText("");
+        }
+    }
+
     public static void main(String[] args) {
         launch(args);
     }
