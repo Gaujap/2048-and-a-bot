@@ -60,6 +60,13 @@ public class Game {
         return merged;
     }
 
+    private boolean slideAndMerge(int[] line) {
+        boolean moved = compact(line);
+        boolean merged = merge(line);
+        moved = compact(line) || moved || merged;
+        return moved;
+    }
+
     private void moveUp() {
         boolean moved = false;
 
