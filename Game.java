@@ -47,6 +47,19 @@ public class Game {
         return moved;
     }
 
+    private boolean merge(int[] line) {
+        boolean merged = false;
+        for (int i = 0; i < line.length - 1; i++) {
+            if (line[i] != 0 && line[i] == line[i + 1]) {
+                line[i] *= 2;
+                score += line[i];
+                line[i + 1] = 0;
+                merged = true;
+            }
+        }
+        return merged;
+    }
+
     private void moveUp() {
         boolean moved = false;
 
