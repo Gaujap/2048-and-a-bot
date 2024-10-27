@@ -142,25 +142,21 @@ public class Game {
     }
 
     public void move(String direction) {
-        switch (direction) {
-            case "z":
-                moveUp();
-                break;
-            case "s":
-                moveDown();
-                break;
-            case "q":
-                moveLeft();
-                break;
-            case "d":
-                moveRight();
-                break;
-            default:
-                messageManager.printInvalidDirection();
-        }
+        boolean moved = switch (direction) {
+            case "z" -> slideVertical(true);     // Haut
+            case "s" -> slideVertical(false);    // Bas
+            case "q" -> slideHorizontal(true);   // Gauche
+            case "d" -> slideHorizontal(false);  // Droite
+            default -> false;
+        };
 
-        lose = isLose();
-        win = isWin();
+        if (moved) {
+            addRandomTile();
+            lose = isLose();
+            win = isWin();
+        } else {
+            messageManager.printInvalidDirection();
+        }
     }
 
     public void printBoard() {
