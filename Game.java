@@ -217,7 +217,24 @@ public class Game {
     }
 
     public void move(String direction) {
-        // Move all tiles in the given direction
+        switch (direction) {
+            case "z":
+                moveUp();
+                break;
+            case "s":
+                moveDown();
+                break;
+            case "q":
+                moveLeft();
+                break;
+            case "d":
+                moveRight();
+                break;
+            default:
+                System.out.println("Invalid direction");
+        }
+
+        lose = isLose();
     }
 
     public void printBoard() {
