@@ -9,6 +9,7 @@ public class Game {
     private boolean win;
     private Random random = new Random();
     private Scanner scanner = new Scanner(System.in);
+    private MessageManager messageManager = new MessageManager();
 
     public Game(int size) {
         this.size = size;
@@ -265,31 +266,31 @@ public class Game {
                 moveRight();
                 break;
             default:
-                System.out.println("Invalid direction");
+                messageManager.printInvalidDirection();
         }
 
         lose = isLose();
+        win = isWin();
     }
 
     public void printBoard() {
-        for (int i = 0; i < size; i++) {
-            for (int j = 0; j < size; j++) {
-                System.out.print(board[i][j] + " ");
-            }
-            System.out.println();
-        }
+        messageManager.printBoard(board);
     }
 
     public void printScore() {
-        System.out.print("Score: " + score);
+        messageManager.printScore(score);
     }
 
     public void printLose() {
-        System.out.println("You lose!");
+        if (lose) {
+            messageManager.printLose();
+        }
     }
 
     public void printWin() {
-        System.out.println("You win!");
+        if (isWin()) {
+            messageManager.printWin();
+        }
     }
 
     public void play() {
