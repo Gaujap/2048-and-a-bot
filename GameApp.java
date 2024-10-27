@@ -1,11 +1,13 @@
 import javafx.application.Application;
 import javafx.scene.Scene;
 import javafx.scene.control.Label;
+import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.VBox;
 import javafx.scene.text.Font;
 import javafx.scene.text.Text;
+import javafx.scene.text.TextAlignment;
 import javafx.stage.Stage;
 
 public class GameApp extends Application {
@@ -37,6 +39,17 @@ public class GameApp extends Application {
         primaryStage.show();
 
         scene.setOnKeyPressed(this::handleKeyPress);
+    }
+
+    private void handleKeyPress(KeyEvent event) {
+        switch (event.getCode()) {
+            case Z -> game.move("z");
+            case S -> game.move("s");
+            case Q -> game.move("q");
+            case D -> game.move("d");
+        }
+        updateGrid();
+        updateScoreAndStatus();
     }
 
     public static void main(String[] args) {
