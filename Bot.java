@@ -14,8 +14,8 @@ public class Bot {
     public String getBestMove() {
         int bestScore = -1;
         String bestDirection = "";
-
         String[] directions = {"z", "s", "q", "d"};
+
         for (String direction : directions) {
             Game gameCopy = new Game(game.setSize());
             gameCopy.setBoard(copyBoard(game.getBoard()));
@@ -31,6 +31,49 @@ public class Bot {
         return bestDirection;
     }
 
+    public String getBestMoveMonteCarlo(int simulations) {
+        int bestScore = -1;
+        String bestDirection = "";
+        String[] directions = {"z", "s", "q", "d"};
+
+        for (String direction : directions) {
+            int totalScore = 0;
+
+            for (int i = 0; i < simulations; i++) {
+                Game gameCopy = new Game(game.setSize());
+                gameCopy.setBoard(copyBoard(game.getBoard()));
+                gameCopy.setScore(game.getScore());
+
+                gameCopy.move(direction);
+
+                totalScore += simulateRandomGame(gameCopy, 10);
+            }
+
+            int averageScore = totalScore / simulations;
+
+            if (averageScore > bestScore) {
+                bestScore = averageScore;
+                bestDirection = direction;
+            }
+        }
+        return bestDirection;
+    }
+
+    private int simulateRandomGame(Game gameCopy, int steps) {
+        Random random = new Random();
+
+        for (int i = 0; i < steps; i++) {
+            String randomDirection = getRandomDirection(random);
+            gameCopy.move(randomDirection);
+        }
+        return gameCopy.getScore();
+    }
+
+    private String getRandomDirection(Random random) {
+        String[] directions = {"z", "s", "q", "d"};
+        return directions[random.nextInt(directions.length)];
+    }
+
     private int[][] copyBoard(int[][] original) {
         int[][] copy = new int[original.length][];
         for (int i = 0; i < original.length; i++) {
@@ -42,7 +85,7 @@ public class Bot {
 
     public void play() {
         while (!game.isLose() && !game.isWin()) {
-            String direction = getBestMove();
+            String direction = getBestMoveMonteCarlo(10);
             game.move(direction);
 
             Platform.runLater(() -> {
