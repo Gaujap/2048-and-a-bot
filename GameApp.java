@@ -79,6 +79,25 @@ public class GameApp extends Application {
         }
     }
 
+    private String getCellStyle(int value) {
+        String color;
+        switch (value) {
+            case 2 -> color = "#eee4da";
+            case 4 -> color = "#ede0c8";
+            case 8 -> color = "#f2b179";
+            case 16 -> color = "#f59563";
+            case 32 -> color = "#f67c5f";
+            case 64 -> color = "#f65e3b";
+            case 128 -> color = "#edcf72";
+            case 256 -> color = "#edcc61";
+            case 512 -> color = "#edc850";
+            case 1024 -> color = "#edc53f";
+            case 2048 -> color = "#edc22e";
+            default -> color = "#cdc1b4";
+        }
+        return "-fx-background-color: " + color + "; -fx-alignment: center; -fx-border-color: black;";
+    }
+
     public static void main(String[] args) {
         launch(args);
     }
