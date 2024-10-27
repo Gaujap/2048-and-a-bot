@@ -1,4 +1,5 @@
 import java.util.Random;
+import java.util.Scanner;
 
 public class Game {
     private int size;
@@ -6,6 +7,7 @@ public class Game {
     private int score;
     private boolean lose;
     private Random random = new Random();
+    private Scanner scanner = new Scanner(System.in);
 
     public Game(int size) {
         this.size = size;
@@ -241,6 +243,14 @@ public class Game {
         printBoard();
         printScore();
         printLose();
+
+        while (!lose) {
+            String direction = scanner.next();
+            move(direction);
+            printBoard();
+            printScore();
+            printLose();
+        }
     }
 
     public static void main(String[] args) {
