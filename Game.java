@@ -86,6 +86,25 @@ public class Game {
         return moved;
     }
 
+    private boolean slideHorizontal(boolean leftwards) {
+        boolean moved = false;
+        for (int row = 0; row < size; row++) {
+            int[] line = new int[size];
+            for (int col = 0; col < size; col++) {
+                line[col] = leftwards ? board[row][col] : board[row][size - col - 1];
+            }
+            moved |= slideAndMerge(line);
+            for (int col = 0; col < size; col++) {
+                if (leftwards) {
+                    board[row][col] = line[col];
+                } else {
+                    board[row][size - col - 1] = line[col];
+                }
+            }
+        }
+        return moved;
+    }
+
     private void moveUp() {
         boolean moved = false;
 
