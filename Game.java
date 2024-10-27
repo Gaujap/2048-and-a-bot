@@ -213,8 +213,26 @@ public class Game {
     }
 
     private boolean isLose() {
-        // Check if the game is lost
-        return false;
+        for (int i = 0; i < size; i++) {
+            for (int j = 0; j < size; j++) {
+                if (board[i][j] == 0) {
+                    return false;
+                }
+                if (i > 0 && board[i - 1][j] == board[i][j]) {
+                    return false;
+                }
+                if (i < size - 1 && board[i + 1][j] == board[i][j]) {
+                    return false;
+                }
+                if (j > 0 && board[i][j - 1] == board[i][j]) {
+                    return false;
+                }
+                if (j < size - 1 && board[i][j + 1] == board[i][j]) {
+                    return false;
+                }
+            }
+        }
+        return true;
     }
 
     private boolean isWin() {
