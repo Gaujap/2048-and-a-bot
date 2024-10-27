@@ -71,7 +71,7 @@ public class GameApp extends Application {
         }
     }
 
-    private void updateScoreAndStatus() {
+    public void updateScoreAndStatus() {
         scoreLabel.setText("Score: " + game.getScore());
 
         if (game.isWin()) {

@@ -1,3 +1,5 @@
+import javafx.application.Platform;
+
 import java.util.Random;
 
 public class Bot {
@@ -18,7 +20,12 @@ public class Bot {
         while (!game.isLose() && !game.isWin()) {
             String direction = getBestMove();
             game.move(direction);
-            gameApp.updateGrid();
+
+            Platform.runLater(() -> {
+                gameApp.updateGrid();
+                gameApp.updateScoreAndStatus();
+            });
+
             try {
                 Thread.sleep(1000);
             } catch (InterruptedException e) {
