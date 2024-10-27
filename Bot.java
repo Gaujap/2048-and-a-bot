@@ -2,9 +2,11 @@ import java.util.Random;
 
 public class Bot {
     private Game game;
+    private GameApp gameApp;
 
-    public Bot(Game game) {
+    public Bot(Game game, GameApp gameApp) {
         this.game = game;
+        this.gameApp = gameApp;
     }
 
     public String getBestMove() {
@@ -16,6 +18,7 @@ public class Bot {
         while (!game.isLose() && !game.isWin()) {
             String direction = getBestMove();
             game.move(direction);
+            gameApp.updateGrid();
             try {
                 Thread.sleep(1000);
             } catch (InterruptedException e) {
