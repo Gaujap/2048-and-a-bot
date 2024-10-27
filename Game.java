@@ -16,6 +16,8 @@ public class Game {
         this.board = new int[size][size];
         this.score = 0;
         this.lose = false;
+        addRandomTile();
+        addRandomTile();
     }
 
     private void addRandomTile() {
@@ -27,6 +29,22 @@ public class Game {
         } while (board[x][y] != 0);
 
         board[x][y] = value;
+    }
+
+    private boolean compact(int[] line) {
+        boolean moved = false;
+        int target = 0;
+        for (int i = 0; i < line.length; i++) {
+            if (line[i] != 0) {
+                if (i != target) {
+                    line[target] = line[i];
+                    line[i] = 0;
+                    moved = true;
+                }
+                target++;
+            }
+        }
+        return moved;
     }
 
     private void moveUp() {
