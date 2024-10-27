@@ -15,6 +15,7 @@ public class GameApp extends Application {
     private GridPane grid;
     private Label scoreLabel;
     private Text statusText;
+    private Bot bot;
 
     @Override
     public void start(Stage primaryStage) {
@@ -39,6 +40,9 @@ public class GameApp extends Application {
         primaryStage.show();
 
         scene.setOnKeyPressed(this::handleKeyPress);
+
+        bot = new Bot(game);
+        new Thread(() -> bot.play()).start();
     }
 
     private void handleKeyPress(KeyEvent event) {
