@@ -12,8 +12,20 @@ public class Bot {
     }
 
     public String getBestMove() {
+        int bestScore = -1;
+        String bestDirection = "";
+
         String[] directions = {"z", "s", "q", "d"};
-        return directions[new Random().nextInt(directions.length)];
+        for (String direction : directions) {
+            Game gameCopy = new Game(game.setSize());
+            gameCopy.setBoard(game.getBoard());
+            gameCopy.setScore(game.getScore());
+            if (gameCopy.getScore() > bestScore) {
+                bestScore = gameCopy.getScore();
+                bestDirection = direction;
+            }
+        }
+        return bestDirection;
     }
 
     public void play() {
