@@ -18,8 +18,11 @@ public class Bot {
         String[] directions = {"z", "s", "q", "d"};
         for (String direction : directions) {
             Game gameCopy = new Game(game.setSize());
-            gameCopy.setBoard(game.getBoard());
+            gameCopy.setBoard(copyBoard(game.getBoard()));
             gameCopy.setScore(game.getScore());
+
+            gameCopy.move(direction);
+
             if (gameCopy.getScore() > bestScore) {
                 bestScore = gameCopy.getScore();
                 bestDirection = direction;
@@ -27,6 +30,15 @@ public class Bot {
         }
         return bestDirection;
     }
+
+    private int[][] copyBoard(int[][] original) {
+        int[][] copy = new int[original.length][];
+        for (int i = 0; i < original.length; i++) {
+            copy[i] = original[i].clone();
+        }
+        return copy;
+    }
+
 
     public void play() {
         while (!game.isLose() && !game.isWin()) {
