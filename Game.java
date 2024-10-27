@@ -26,7 +26,22 @@ public class Game {
     }
 
     private void moveUp() {
-        // Move all tiles up
+        for (int i = 0; i < size; i++) {
+            for (int j = 1; j < size; j++) {
+                if (board[i][j] != 0) {
+                    int k = i;
+                    while (k > 0 && board[k - 1][j] == 0) {
+                        board[k-1][j] = board[k][j];
+                        board[k][j] = 0;
+                        k--;
+                    }
+                    if (k > 0 && board[k-1][j] == board[k][j]) {
+                        board[k-1][j] *= 2;
+                        board[k][j] = 0;
+                    }
+                }
+            }
+        }
     }
 
     private void moveDown() {
