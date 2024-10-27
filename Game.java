@@ -6,6 +6,7 @@ public class Game {
     private int[][] board;
     private int score;
     private boolean lose;
+    private boolean win;
     private Random random = new Random();
     private Scanner scanner = new Scanner(System.in);
 
@@ -216,6 +217,11 @@ public class Game {
         return false;
     }
 
+    private boolean isWin() {
+        // Check if the game is won
+        return false;
+    }
+
     public void move(String direction) {
         switch (direction) {
             case "z":
@@ -252,6 +258,10 @@ public class Game {
 
     public void printLose() {
         // Print if the game is lost
+    }
+
+    public void printWin() {
+        // Print if the game is won
     }
 
     public void play() {
