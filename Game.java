@@ -137,11 +137,9 @@ public class Game {
     }
 
     private boolean isWin() {
-        for (int i = 0; i < size; i++) {
-            for (int j = 0; j < size; j++) {
-                if (board[i][j] == 2048) {
-                    return true;
-                }
+        for (int[] row : board) {
+            for (int tile : row) {
+                if (tile == 2048) return true;
             }
         }
         return false;
