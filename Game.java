@@ -72,21 +72,48 @@ public class Game {
     }
 
     private void moveDown() {
+        boolean moved = false;
+
         for (int i = 0; i < size; i++) {
-            for (int j = 0; j < size ; j++) {
+            for (int j = size - 2; j >= 0; j--) {
                 if (board[i][j] != 0) {
                     int k = i;
                     while (k < size - 1 && board[k + 1][j] == 0) {
                         board[k + 1][j] = board[k][j];
                         board[k][j] = 0;
                         k++;
-                    }
-                    if (k < size - 1 && board[k + 1][j] == board[k][j]) {
-                        board[k + 1][j] *= 2;
-                        board[k][j] = 0;
+                        moved = true;
                     }
                 }
             }
+        }
+
+        for (int i = 0; i < size; i++) {
+            for (int j = size - 1; j >= 0; j--) {
+                if (board[i][j] != 0 && j < size - 1 && board[i][j + 1] == board[i][j]) {
+                    board[i][j + 1] *= 2;
+                    board[i][j] = 0;
+                    moved = true;
+                }
+            }
+        }
+
+        for (int i = 0; i < size; i++) {
+            for (int j = size - 2; j >= 0; j--) {
+                if (board[i][j] != 0) {
+                    int k = i;
+                    while (k < size - 1 && board[k + 1][j] == 0) {
+                        board[k + 1][j] = board[k][j];
+                        board[k][j] = 0;
+                        k++;
+                        moved = true;
+                    }
+                }
+            }
+        }
+
+        if (moved) {
+            addRandomTile();
         }
     }
 
