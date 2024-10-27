@@ -164,7 +164,49 @@ public class Game {
     }
 
     private void moveRight() {
-        // Move all tiles right
+        boolean moved = false;
+
+        for (int i = 0; i < size; i++) {
+            for (int j = size - 2; j >= 0; j--) {
+                if (board[i][j] != 0) {
+                    int k = j;
+                    while (k < size - 1 && board[i][k + 1] == 0) {
+                        board[i][k + 1] = board[i][k];
+                        board[i][k] = 0;
+                        k++;
+                        moved = true;
+                    }
+                }
+            }
+        }
+
+        for (int i = 0; i < size; i++) {
+            for (int j = size - 1; j >= 0; j--) {
+                if (board[i][j] != 0 && j < size - 1 && board[i][j + 1] == board[i][j]) {
+                    board[i][j + 1] *= 2;
+                    board[i][j] = 0;
+                    moved = true;
+                }
+            }
+        }
+
+        for (int i = 0; i < size; i++) {
+            for (int j = size - 2; j >= 0; j--) {
+                if (board[i][j] != 0) {
+                    int k = j;
+                    while (k < size - 1 && board[i][k + 1] == 0) {
+                        board[i][k + 1] = board[i][k];
+                        board[i][k] = 0;
+                        k++;
+                        moved = true;
+                    }
+                }
+            }
+        }
+
+        if (moved) {
+            addRandomTile();
+        }
     }
 
     private boolean isLose() {
