@@ -182,6 +182,12 @@ public class Game {
     public void printWin() {
         if (isWin()) {
             messageManager.printWin();
+
+            System.out.println("Infinite mode ? (o/n)");
+            String input = scanner.next();
+            if (!input.equalsIgnoreCase("o")) {
+                lose = true;
+            }
         }
     }
 

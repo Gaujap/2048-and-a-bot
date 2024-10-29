@@ -65,8 +65,70 @@ public class Bot {
         for (int i = 0; i < steps; i++) {
             String randomDirection = getRandomDirection(random);
             gameCopy.move(randomDirection);
+
+            if (gameCopy.isLose()) break;
         }
-        return gameCopy.getScore();
+        return gameCopy.getScore() + evaluateGrid(gameCopy);
+    }
+
+    private int evaluateGrid(Game gameCopy) {
+        int[][] board = gameCopy.getBoard();
+        int score = 0;
+
+        score += countEmptyCells(board) * 10;
+
+        score += calculateGroupingScore(board);
+
+        score += calculateCornerBonus(board);
+
+        return score;
+    }
+
+    private int countEmptyCells(int[][] board) {
+        int emptyCount = 0;
+        for (int[] row : board) {
+            for (int cell : row) {
+                if (cell == 0) emptyCount++;
+            }
+        }
+        return emptyCount;
+    }
+
+    private int calculateGroupingScore(int[][] board) {
+        int groupingScore = 0;
+        for (int row = 0; row < board.length; row++) {
+            for (int col = 0; col < board[row].length; col++) {
+                if (board[row][col] != 0) {
+                    if (row < board.length - 1 && board[row][col] == board[row + 1][col]) {
+                        groupingScore += board[row][col];
+                    }
+                    if (col < board[row].length - 1 && board[row][col] == board[row][col + 1]) {
+                        groupingScore += board[row][col];
+                    }
+                }
+            }
+        }
+        return groupingScore;
+    }
+
+    private int calculateCornerBonus(int[][] board) {
+        int cornerBonus = 0;
+
+        int maxCell = getMaxCell(board);
+        if (board[0][0] == maxCell || board[0][board.length - 1] == maxCell || board[board.length - 1][0] == maxCell || board[board.length - 1][board.length - 1] == maxCell) {
+            cornerBonus += maxCell * 5;
+        }
+        return cornerBonus;
+    }
+
+    private int getMaxCell(int[][] board) {
+        int maxCell = 0;
+        for (int[] row : board) {
+            for (int cell : row) {
+                maxCell = Math.max(maxCell, cell);
+            }
+        }
+        return maxCell;
     }
 
     private String getRandomDirection(Random random) {
@@ -84,8 +146,8 @@ public class Bot {
 
 
     public void play() {
-        while (!game.isLose() && !game.isWin()) {
-            String direction = getBestMoveMonteCarlo(10);
+        while (!game.isLose()) {
+            String direction = getBestMoveMonteCarlo(100);
             game.move(direction);
 
             Platform.runLater(() -> {
