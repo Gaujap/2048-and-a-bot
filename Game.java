@@ -209,4 +209,8 @@ public class Game {
         Game game = new Game(4);
         game.play();
     }
+
+    public int getSize() {
+        return size;
+    }
 }
